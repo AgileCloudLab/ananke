@@ -31,3 +31,10 @@
 *.exe
 *.out
 *.app
+
+.lock-waf_linux_build
+.waf*
+build/
+build_current
+resolve_symlinks/
+resolved_dependencies/

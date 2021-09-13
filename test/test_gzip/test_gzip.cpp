@@ -23,17 +23,17 @@ TEST(test_gzip, test_gzip_compress_decompress_default)
         
         auto compressed = zipper.compress(data);
 
-        if (compressed.size() == EXPECTED.size())
+        if (compressed.second.size() == EXPECTED.size())
         {
-            EXPECT_EQ(EXPECTED, compressed);
+            EXPECT_EQ(EXPECTED, compressed.second);
         }
         else
         {
-            EXPECT_NE(EXPECTED, compressed);
+            EXPECT_NE(EXPECTED, compressed.second);
         }
     
 
-        auto decompressed = zipper.decompress(compressed, expected_size);
+        auto decompressed = zipper.decompress(compressed.second, expected_size);
         EXPECT_EQ(EXPECTED, decompressed); 
     }
 }
@@ -53,16 +53,16 @@ TEST(test_gzip, test_gzip_compress_decompress_default_zeros)
         
         auto compressed = zipper.compress(data);
 
-        if (compressed.size() == EXPECTED.size())
+        if (compressed.second.size() == EXPECTED.size())
         {
-            EXPECT_EQ(EXPECTED, compressed);
+            EXPECT_EQ(EXPECTED, compressed.second);
         }
         else
         {
-            EXPECT_NE(EXPECTED, compressed);
+            EXPECT_NE(EXPECTED, compressed.second);
         }
     
-        auto decompressed = zipper.decompress(compressed, expected_size);
+        auto decompressed = zipper.decompress(compressed.second, expected_size);
     }
 }
 

@@ -21,7 +21,7 @@ namespace ananke
 
     gzip::gzip(const size_t level) : m_level(level) {}
 
-    std::vector<uint8_t> gzip::compress(std::vector<uint8_t>& data)
+    std::pair<bool, std::vector<uint8_t>> gzip::compress(std::vector<uint8_t>& data)
     {
         auto tmp_data = data;
 
@@ -42,12 +42,14 @@ namespace ananke
         // TRUE: No compression achived
         if (tmp_data.size() <= static_cast<size_t>(compressed_size))
         {
-            return tmp_data; 
+            auto ret = std::make_pair(false, tmp_data);
+            return ret; 
         }
 
         tmp_data = std::vector<uint8_t>(compressed_size);
         std::memcpy(tmp_data.data(), compressed.data(), compressed_size);
-        return tmp_data;        
+        auto ret = std::make_pair(true, tmp_data); 
+        return ret;
     }
 
     std::vector<uint8_t> gzip::decompress(std::vector<uint8_t>& data, size_t size)

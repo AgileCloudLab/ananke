@@ -73,7 +73,11 @@ namespace ananke
 
     std::vector<uint8_t> bzip2::decompress(std::vector<uint8_t>& data, const size_t size)
     {
-        unsigned int dest_length = size + 2;        
+        if (data.size() == size)
+        {
+            return data; 
+        }
+        unsigned int dest_length = size + static_cast<unsigned int> (size * 0.20);;
         std::vector<uint8_t> decompressed(dest_length);
 
         unsigned int source_length = data.size();
@@ -81,11 +85,14 @@ namespace ananke
         // TODO: Validate the two last inputs
         int result = BZ2_bzBuffToBuffDecompress((char*) decompressed.data(), &dest_length, (char*) data.data(), source_length, 0, 0);
 
-
         if (result != BZ_OK)
         {
-            std::string msg = "Decompression error: {}"; 
-            if (result == BZ_PARAM_ERROR)
+            std::string msg = "Decompression error: {}";
+            if (result == BZ_CONFIG_ERROR)
+            {
+                msg = fmt::format(msg, "Configuration error");
+            }
+            else if (result == BZ_PARAM_ERROR)
             {
                 msg = fmt::format(msg, "Parameter error"); 
             }
@@ -100,6 +107,10 @@ namespace ananke
             else if (result == BZ_DATA_ERROR)
             {
                 msg = fmt::format(msg, "Data integrity broken"); 
+            }
+            else if (result == BZ_DATA_ERROR_MAGIC)
+            {
+                msg = fmt::format(msg, "Compressed data is missing the magic byte"); 
             }
             else if (result == BZ_UNEXPECTED_EOF)
             {

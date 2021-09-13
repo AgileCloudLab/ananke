@@ -18,7 +18,7 @@ namespace ananke
                                                                                                            m_work_factor(work_factor) {}
     
 
-    std::vector<uint8_t> bzip2::compress(std::vector<uint8_t>& data)
+    std::pair<bool, std::vector<uint8_t>> bzip2::compress(std::vector<uint8_t>& data)
     {
         std::vector<uint8_t> org_data_backup = data;
 
@@ -54,17 +54,21 @@ namespace ananke
 
         if (dest_length >= source_length)
         {
-            return org_data_backup; 
+            auto ret = std::make_pair(false, org_data_backup);
+            return ret; 
         }
         org_data_backup.clear(); 
 
         if (compressed.size() > dest_length)
         {
-            std::vector<uint8_t> compressed2(dest_length);
-            std::memcpy(compressed.data(), compressed.data(), dest_length); 
+            compressed.resize(dest_length); 
+            // std::vector<uint8_t> compressed2(dest_length);
+            // std::memcpy(compressed.data(), compressed.data(), dest_length);
+            // return compressed2; 
         }
 
-        return compressed;
+        auto ret = std::make_pair(true, compressed);
+        return ret; 
     }
 
     std::vector<uint8_t> bzip2::decompress(std::vector<uint8_t>& data, const size_t size)

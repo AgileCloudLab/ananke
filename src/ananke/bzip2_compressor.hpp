@@ -7,6 +7,8 @@
 
 #include <vector>
 
+#include <utility>
+
 namespace ananke
 {
 
@@ -19,7 +21,7 @@ public:
     
     bzip2(const int block_size, const int verbosity, const int work_factor);
 
-    std::vector<uint8_t> compress(std::vector<uint8_t>& data);
+    std::pair<bool, std::vector<uint8_t>> compress(std::vector<uint8_t>& data);
 
     std::vector<uint8_t> decompress(std::vector<uint8_t>& data, const size_t size);
 

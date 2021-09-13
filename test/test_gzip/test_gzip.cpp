@@ -34,6 +34,7 @@ TEST(test_gzip, test_gzip_compress_decompress_default)
     
 
         auto decompressed = zipper.decompress(compressed, expected_size);
+        EXPECT_EQ(EXPECTED, decompressed); 
     }
 }
 

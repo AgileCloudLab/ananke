@@ -22,20 +22,20 @@ TEST(test_bzip2, test_bzip2_compress_decompress_default)
         
         auto compressed = zipper.compress(data);
 
-        if (compressed.size() == EXPECTED.size())
+        if (compressed.second.size() == EXPECTED.size())
         {
-            EXPECT_EQ(EXPECTED, compressed);
+            EXPECT_EQ(EXPECTED, compressed.second);
         }
         else
         {
-            EXPECT_NE(EXPECTED, compressed);
+            EXPECT_NE(EXPECTED, compressed.second);
         }
 
-        auto decompressed = zipper.decompress(compressed, expected_size);
+        auto decompressed = zipper.decompress(compressed.second, expected_size);
     }
 }
 
-TEST(test_bzip2, test_bzip2_compress_decompress_default_zeros)
+TEST(test_bzip2, test_bzip2_compress_decompress_default_zeros_and_a_one)
 {
     
     const size_t expected_size = 16384;
@@ -43,23 +43,24 @@ TEST(test_bzip2, test_bzip2_compress_decompress_default_zeros)
 
     for (size_t i = 0; i < 10000; ++i)
     {
-        auto data = std::vector<uint8_t>(expected_size, 0); 
+        auto data = std::vector<uint8_t>(expected_size, 0);
+        data.at(i) = 1; 
         auto EXPECTED = data;
 
         EXPECT_EQ(data, EXPECTED);
         
         auto compressed = zipper.compress(data);
 
-        if (compressed.size() == EXPECTED.size())
+        if (compressed.second.size() == EXPECTED.size())
         {
-            EXPECT_EQ(EXPECTED, compressed);
+            EXPECT_EQ(EXPECTED, compressed.second);
         }
         else
         {
-            EXPECT_NE(EXPECTED, compressed);
+            EXPECT_NE(EXPECTED, compressed.second);
         }
     
-        auto decompressed = zipper.decompress(compressed, expected_size);
+        auto decompressed = zipper.decompress(compressed.second, expected_size);
     }
 }
 

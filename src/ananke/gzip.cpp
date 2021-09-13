@@ -1,4 +1,4 @@
-#include "gzip_compressor.hpp"
+#include "gzip.hpp"
 
 #include <zlib.h>
 

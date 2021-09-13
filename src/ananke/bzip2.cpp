@@ -1,4 +1,4 @@
-#include "bzip2_compressor.hpp"
+#include "bzip2.hpp"
 
 // BZLIB include 
 #include <bzlib.h>

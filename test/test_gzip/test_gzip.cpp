@@ -1,4 +1,4 @@
-#include <ananke/gzip_compressor.hpp>
+#include <ananke/gzip.hpp>
 
 #include "../helpers.hpp"
 

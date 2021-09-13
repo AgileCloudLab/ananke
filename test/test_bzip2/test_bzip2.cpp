@@ -1,4 +1,4 @@
-#include <ananke/bzip2_compressor.hpp>
+#include <ananke/bzip2.hpp>
 
 #include "../helpers.hpp"
 

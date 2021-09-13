@@ -33,7 +33,7 @@ def configure(ctx) :
 
 def build(bld):
 
-    lib = ["fmt", "z"]
+    lib = ["fmt", "z", "bz2"]
     
     bld(name = "{}_includes".format(APPNAME),
         includes="./src",
@@ -48,6 +48,7 @@ def build(bld):
     )
 
     bld.recurse("test/test_gzip")
+    bld.recurse("test/test_bzip2")    
 
     
 

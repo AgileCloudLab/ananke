@@ -20,8 +20,9 @@ class bzip2
 public:
 
     /// Construct the bzip2 object using a json configuration
-    /// @param config is a json object with the appropriate fields for bzip, see second constructor for needed values
-    /// @throws std::runtime_error if a ocnfiguration parameter is missing 
+    /// @param config is a json object with the appropriate fields for bzip,
+    ///        see second constructor for needed values and naming
+    /// @throws std::runtime_error if a configuration parameter is missing 
     bzip2(const nlohmann::json& config);
 
     /// Construct the bzip2 object

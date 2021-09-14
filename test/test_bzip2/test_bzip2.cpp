@@ -32,6 +32,7 @@ TEST(test_bzip2, test_bzip2_compress_decompress_default)
         }
 
         auto decompressed = zipper.decompress(compressed.second, expected_size);
+        EXPECT_EQ(EXPECTED, decompressed);         
     }
 }
 
@@ -61,6 +62,7 @@ TEST(test_bzip2, test_bzip2_compress_decompress_default_zeros_and_a_one)
         }
     
         auto decompressed = zipper.decompress(compressed.second, expected_size);
+        EXPECT_EQ(EXPECTED, decompressed);         
     }
 }
 

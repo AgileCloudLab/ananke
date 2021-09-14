@@ -59,7 +59,6 @@ namespace ananke
             return data; 
         }
 
-        auto tmp_data = data;         
 
         unsigned long decompressed_size = static_cast<unsigned long>(size); 
         std::vector<uint8_t> decompressed(size);
@@ -69,11 +68,6 @@ namespace ananke
         if (result != Z_OK)
         {
             throw std::runtime_error("Gzip error uncompressing data"); 
-        }
-
-        if (tmp_data.size() <= decompressed.size())
-        {
-            return tmp_data; 
         }
 
         return decompressed; 

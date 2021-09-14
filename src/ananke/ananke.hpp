@@ -13,6 +13,12 @@
 namespace ananke
 {
 
+    enum algorithmn
+    {
+        GZIP,
+        BZIP2
+    };
+    
     /// Ananke factory creates a zipper based on the template type provided and configures it using the provided JSON configuration
     /// @param config is the json configuration used to configure the compression algorithm constructor for the parameters
     /// @return the configured compression algorithm zipper; 
@@ -33,6 +39,10 @@ namespace ananke
             throw std::runtime_error("[Ananke] unknown compression algorithmn type");
         }
     }
+
+    std::pair<bool, std::vector<uint8_t>> compress(const algorithmn algo, const nlohmann::json& config, std::vector<uint8_t>& data);
+
+    std::vector<uint8_t> decompress(const algorithmn algo, const nlohmann::json& config, std::vector<uint8_t>& data, size_t size); 
 }
 
 #endif /* ANANKE_HPP */ 

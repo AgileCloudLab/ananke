@@ -34,7 +34,7 @@ TEST(test_gzip, test_gzip_compress_decompress_default)
     
 
         auto decompressed = zipper.decompress(compressed.second, expected_size);
-        EXPECT_EQ(EXPECTED, decompressed); 
+        EXPECT_EQ(EXPECTED, decompressed);
     }
 }
 
@@ -63,11 +63,9 @@ TEST(test_gzip, test_gzip_compress_decompress_default_zeros)
         }
     
         auto decompressed = zipper.decompress(compressed.second, expected_size);
+        EXPECT_EQ(EXPECTED, decompressed);         
     }
 }
-
-
-
 
 int main(int argc, char **argv) {
     srand(static_cast<uint32_t>(time(0)));

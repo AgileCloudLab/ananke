@@ -41,6 +41,7 @@ TEST(test_ananke, test_ananke_bzip2_compress_decompress_default)
         }
 
         auto decompressed = zipper.decompress(compressed.second, expected_size);
+        EXPECT_EQ(EXPECTED, decompressed);         
     }
 }
 
@@ -77,6 +78,7 @@ TEST(test_ananke, test_ananke_bzip2_compress_decompress_default_zeros_and_a_one)
         }
     
         auto decompressed = zipper.decompress(compressed.second, expected_size);
+        EXPECT_EQ(EXPECTED, decompressed);         
     }
 }
 
@@ -143,8 +145,76 @@ TEST(test_ananke, test_ananke_gzip_compress_decompress_default_zeros)
         }
     
         auto decompressed = zipper.decompress(compressed.second, expected_size);
+        EXPECT_EQ(EXPECTED, decompressed);         
     }
 }
+
+TEST(test_ananke, test_ananke_gzip_ananke_compress_decompress_default_zeros)
+{
+    
+    const size_t expected_size = 16384;
+
+    nlohmann::json config;
+    config["level"] = 6;
+
+    for (size_t i = 0; i < 10000; ++i)
+    {
+        auto data = std::vector<uint8_t>(expected_size, 0); 
+        auto EXPECTED = data;
+
+        EXPECT_EQ(data, EXPECTED);
+        
+        auto compressed = ananke::compress(ananke::algorithmn::GZIP, config, data); 
+
+        if (compressed.second.size() == EXPECTED.size())
+        {
+            EXPECT_EQ(EXPECTED, compressed.second);
+        }
+        else
+        {
+            EXPECT_NE(EXPECTED, compressed.second);
+        }
+    
+        auto decompressed = ananke::decompress(ananke::algorithmn::GZIP, config, compressed.second, expected_size);
+        EXPECT_EQ(EXPECTED, decompressed); 
+    }
+}
+
+TEST(test_ananke, test_ananke_bzip2_ananke_compress_decompress_default_zeros)
+{
+    
+    const size_t expected_size = 16384;
+
+    nlohmann::json config;
+
+    config["block_size"] = 1;
+    config["verbosity"] = 0;
+    config["work_factor"] = 30;
+
+
+    for (size_t i = 0; i < 10000; ++i)
+    {
+        auto data = std::vector<uint8_t>(expected_size, 0); 
+        auto EXPECTED = data;
+
+        EXPECT_EQ(data, EXPECTED);
+        
+        auto compressed = ananke::compress(ananke::algorithmn::BZIP2, config, data); 
+
+        if (compressed.second.size() == EXPECTED.size())
+        {
+            EXPECT_EQ(EXPECTED, compressed.second);
+        }
+        else
+        {
+            EXPECT_NE(EXPECTED, compressed.second);
+        }
+    
+        auto decompressed = ananke::decompress(ananke::algorithmn::BZIP2, config, compressed.second, expected_size);
+        EXPECT_EQ(EXPECTED, decompressed); 
+    }
+}
+
 
 int main(int argc, char **argv) {
     srand(static_cast<uint32_t>(time(0)));

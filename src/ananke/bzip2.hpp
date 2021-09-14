@@ -43,13 +43,28 @@ public:
     /// @returns the decompressed byte vector, if input data.size() == size no processing is done and data is returned
     std::vector<uint8_t> decompress(std::vector<uint8_t>& data, const size_t size);
 
-    void block_size(const int new_block_size); 
+    /// Sets a new block size
+    /// @param new_block_size is the new block size (must be positive)
+    void block_size(const int new_block_size);
+
+    /// Get the block size
+    /// @returns this block size 
     int block_size() const;
 
+    /// Set the verbosity level
+    /// @param new_verbosity is the new verbosity level
     void verbosity(const int new_verbosity);
+
+    /// Get the verbosity level
+    /// @returns the verbosity levels
     int verbosity() const;
 
+    /// Set a new work factor 
+    /// @param new_work_factor is the new work factor
     void work_factor(const int new_work_factor);
+
+    /// Get the work factor
+    /// @returns the work factor 
     int work_factor() const;
     
 private:

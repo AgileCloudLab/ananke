@@ -13,7 +13,10 @@
 namespace ananke
 {
 
-    
+    /// Ananke factory creates a zipper based on the template type provided and configures it using the provided JSON configuration
+    /// @param config is the json configuration used to configure the compression algorithm constructor for the parameters
+    /// @return the configured compression algorithm zipper; 
+    /// @throws std::runtime_error if an unknown template type is used 
     template<typename T> T zipper_factory(const nlohmann::json& config)
     {
         if constexpr (std::is_same<T, gzip>::value)

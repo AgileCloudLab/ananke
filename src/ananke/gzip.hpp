@@ -33,7 +33,12 @@ public:
     /// @returns the decompressed byte vector, if input data.size() == size no processing is done and data is returned 
     std::vector<uint8_t> decompress(std::vector<uint8_t>& data, size_t size);
 
+    /// Set the level for the algorithm
+    /// @param level is the new level to be used
     void level(const size_t level);
+
+    /// Get the level gzip is used
+    /// @returns the level 
     size_t level() const; 
 
 private:

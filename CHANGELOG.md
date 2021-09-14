@@ -1,4 +1,12 @@
-# [Latest] 2.0.0
+# [Latest] 2.1.1
+    - Fixing spelling mistake `algorithmn` => `algorithm`
+
+# 2.1.0
+    - Added factory for zippers 
+    - Simple compress and decompress functions 
+    - Fixed bug in gzip wrapper
+    
+# 2.0.0
 
 - Changed API for gzip 
   - Now compress returns a bool to indicated if compression happened along side the compressed vector

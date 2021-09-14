@@ -1,0 +1,6 @@
+def build(bld):
+    bld(features = 'cxx cxxprogram',
+        target = 'test_ananke',
+        source = 'test_ananke.cpp',
+        lib = ["z", "bz2", "fmt"],
+        use = ['ananke_includes', 'ananke', 'gtest'])

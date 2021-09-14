@@ -7,7 +7,14 @@ The software is released under the BSD version 3 license.
 
 # Dependencies 
 
-Ananke depends on two no compression algorithm libraries [nlohmann json](klajdkasjlk)
+Ananke depends on two no compression algorithm libraries 
+
+| Library | Description| 
+--- | ---
+[nlohmann/json](https://github.com/nlohmann/json) | Used for handling JSON in C++
+[fmtlib](https://github.com/fmtlib/fmt) | Used for string formatting in C++
+
+
 
 # Example for gzip 
 

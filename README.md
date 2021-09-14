@@ -5,6 +5,10 @@ Developed and maintained by the Net-X group at the Department of Electrical and 
 
 The software is released under the BSD version 3 license. 
 
+# Dependencies 
+
+Ananke depends on two no compression algorithm libraries [nlohmann json](klajdkasjlk)
+
 # Example for gzip 
 
 ```C++ 

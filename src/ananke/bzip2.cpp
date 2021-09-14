@@ -16,6 +16,30 @@ namespace ananke
     bzip2::bzip2(const int block_size, const int verbosity, const int work_factor) : m_block_size(block_size),
                                                                                                            m_verbosity(verbosity),
                                                                                                            m_work_factor(work_factor) {}
+
+    bzip2::bzip2(const nlohmann::json& config)
+    {
+        std::string msg = "[Ananke] bzip2 json configuration missing: {}";
+
+        if (!config.contains("block_size"))
+        {
+            throw std::runtime_error(fmt::format(msg, "block_size"));
+        }                
+        
+        if (!config.contains("verbosity"))
+        {
+            throw std::runtime_error(fmt::format(msg, "verbosity"));
+        }
+
+        if (!config.contains("work_factor"))
+        {
+            throw std::runtime_error(fmt::format(msg, "work_factor"));
+        }                
+
+        m_block_size = config["block_size"].get<int>();
+        m_verbosity = config["verbosity"].get<int>();
+        m_work_factor = config["work_factor"].get<int>(); 
+    }
     
 
     std::pair<bool, std::vector<uint8_t>> bzip2::compress(std::vector<uint8_t>& data)

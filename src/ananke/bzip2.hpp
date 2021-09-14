@@ -27,7 +27,7 @@ public:
 
     /// Construct the bzip2 object
     /// @param block_size that bzip2 will work on
-    /// @param verboisity which bzip2 will use - silent = 0
+    /// @param verbosity which bzip2 will use - silent = 0
     /// @param work_factor used by bzip2 - 30 is the standard value 
     bzip2(const int block_size, const int verbosity, const int work_factor);
 

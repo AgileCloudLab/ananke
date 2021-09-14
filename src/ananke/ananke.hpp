@@ -18,7 +18,8 @@ namespace ananke
         GZIP,
         BZIP2
     };
-    
+
+    /// \fn
     /// Ananke factory creates a zipper based on the template type provided and configures it using the provided JSON configuration
     /// @param config is the json configuration used to configure the compression algorithm constructor for the parameters
     /// @return the configured compression algorithm zipper; 
@@ -40,8 +41,24 @@ namespace ananke
         }
     }
 
+    /// Creates a zipper based on the input algorithm and the configuration compress the data and disgards the zipper
+    /// \callergraph
+    /// @param algo is the algorithm to be used
+    /// @param config is the json configuration used to configure the zipper
+    /// @param data will be compressed
+    /// @returns a pair of a boolean indicating if any compression happened and the resulting data.
+    ///          if the boolean is false it means data was compressed    
     std::pair<bool, std::vector<uint8_t>> compress(const algorithmn algo, const nlohmann::json& config, std::vector<uint8_t>& data);
 
+
+    /// Creates a zipper based on the input algorithm and the configuration decompress the data and disgards the zipper
+    /// \callergraph    
+    /// @param algo is the algorithm to be used
+    /// @param config is the json configuration used to configure the zipper
+    /// @param data will be decompressed
+    /// @param size in bytes after compression
+    /// @returns the decompressed byte vector, if input data.size() == size no processing is done and data is returned
+    /// @throws std::runtime_error if algo is unknown 
     std::vector<uint8_t> decompress(const algorithmn algo, const nlohmann::json& config, std::vector<uint8_t>& data, size_t size); 
 }
 

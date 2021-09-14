@@ -164,7 +164,7 @@ TEST(test_ananke, test_ananke_gzip_ananke_compress_decompress_default_zeros)
 
         EXPECT_EQ(data, EXPECTED);
         
-        auto compressed = ananke::compress(ananke::algorithmn::GZIP, config, data); 
+        auto compressed = ananke::compress(ananke::algorithm::GZIP, config, data); 
 
         if (compressed.second.size() == EXPECTED.size())
         {
@@ -175,7 +175,7 @@ TEST(test_ananke, test_ananke_gzip_ananke_compress_decompress_default_zeros)
             EXPECT_NE(EXPECTED, compressed.second);
         }
     
-        auto decompressed = ananke::decompress(ananke::algorithmn::GZIP, config, compressed.second, expected_size);
+        auto decompressed = ananke::decompress(ananke::algorithm::GZIP, config, compressed.second, expected_size);
         EXPECT_EQ(EXPECTED, decompressed); 
     }
 }
@@ -199,7 +199,7 @@ TEST(test_ananke, test_ananke_bzip2_ananke_compress_decompress_default_zeros)
 
         EXPECT_EQ(data, EXPECTED);
         
-        auto compressed = ananke::compress(ananke::algorithmn::BZIP2, config, data); 
+        auto compressed = ananke::compress(ananke::algorithm::BZIP2, config, data); 
 
         if (compressed.second.size() == EXPECTED.size())
         {
@@ -210,7 +210,7 @@ TEST(test_ananke, test_ananke_bzip2_ananke_compress_decompress_default_zeros)
             EXPECT_NE(EXPECTED, compressed.second);
         }
     
-        auto decompressed = ananke::decompress(ananke::algorithmn::BZIP2, config, compressed.second, expected_size);
+        auto decompressed = ananke::decompress(ananke::algorithm::BZIP2, config, compressed.second, expected_size);
         EXPECT_EQ(EXPECTED, decompressed); 
     }
 }

@@ -13,7 +13,7 @@
 namespace ananke
 {
 
-    enum algorithmn
+    enum algorithm
     {
         GZIP,
         BZIP2
@@ -48,7 +48,7 @@ namespace ananke
     /// @param data will be compressed
     /// @returns a pair of a boolean indicating if any compression happened and the resulting data.
     ///          if the boolean is false it means data was compressed    
-    std::pair<bool, std::vector<uint8_t>> compress(const algorithmn algo, const nlohmann::json& config, std::vector<uint8_t>& data);
+    std::pair<bool, std::vector<uint8_t>> compress(const algorithm algo, const nlohmann::json& config, std::vector<uint8_t>& data);
 
 
     /// Creates a zipper based on the input algorithm and the configuration decompress the data and disgards the zipper
@@ -59,7 +59,7 @@ namespace ananke
     /// @param size in bytes after compression
     /// @returns the decompressed byte vector, if input data.size() == size no processing is done and data is returned
     /// @throws std::runtime_error if algo is unknown 
-    std::vector<uint8_t> decompress(const algorithmn algo, const nlohmann::json& config, std::vector<uint8_t>& data, size_t size); 
+    std::vector<uint8_t> decompress(const algorithm algo, const nlohmann::json& config, std::vector<uint8_t>& data, size_t size); 
 }
 
 #endif /* ANANKE_HPP */ 

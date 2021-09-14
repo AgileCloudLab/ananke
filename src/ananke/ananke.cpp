@@ -2,14 +2,14 @@
 
 namespace ananke
 {
-    std::pair<bool, std::vector<uint8_t>> compress(const algorithmn algo, const nlohmann::json& config, std::vector<uint8_t>& data)
+    std::pair<bool, std::vector<uint8_t>> compress(const algorithm algo, const nlohmann::json& config, std::vector<uint8_t>& data)
     {
-        if (algo == algorithmn::GZIP)
+        if (algo == algorithm::GZIP)
         {
             auto zipper = zipper_factory<gzip>(config);
             return zipper.compress(data); 
         }
-        else if (algo == algorithmn::BZIP2)
+        else if (algo == algorithm::BZIP2)
         {
             auto zipper = zipper_factory<bzip2>(config);
             return zipper.compress(data); 
@@ -21,14 +21,14 @@ namespace ananke
             
     }
 
-    std::vector<uint8_t> decompress(const algorithmn algo, const nlohmann::json& config, std::vector<uint8_t>& data, size_t size)
+    std::vector<uint8_t> decompress(const algorithm algo, const nlohmann::json& config, std::vector<uint8_t>& data, size_t size)
     {
-        if (algo == algorithmn::GZIP)
+        if (algo == algorithm::GZIP)
         {
             auto zipper = zipper_factory<gzip>(config);
             return zipper.decompress(data, size); 
         }
-        else if (algo == algorithmn::BZIP2)
+        else if (algo == algorithm::BZIP2)
         {
             auto zipper = zipper_factory<bzip2>(config);
             return zipper.decompress(data, size); 

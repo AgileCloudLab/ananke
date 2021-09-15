@@ -1,0 +1,8 @@
+def build(bld):
+
+    
+    bld(features = 'cxx cxxprogram',
+        target = 'gzip_benchmark',
+        source = 'gzip_benchmark.cpp',
+        lib = ["fmt", "z"],
+        use = ['ananke_includes', 'ananke'])

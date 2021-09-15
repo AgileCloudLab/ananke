@@ -1,0 +1,8 @@
+def build(bld):
+
+    
+    bld(features = 'cxx cxxprogram',
+        target = 'bzip2_benchmark',
+        source = 'bzip2_benchmark.cpp',
+        lib = ["fmt", "bz2"],
+        use = ['ananke_includes', 'ananke'])

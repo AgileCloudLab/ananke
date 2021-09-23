@@ -24,6 +24,7 @@ Next we depend on developer libraries for the following compression algorithms:
 
 - gzip 
 - bzip2
+- snappy 
 
 Again packages should be available for both Linux and Mac OS, the latter via Homebrew. 
 
@@ -58,7 +59,7 @@ python waf test
 # Example for gzip 
 
 ```C++ 
-#include <ananke/gzip_compressor.hpp>
+#include <ananke/gzip.hpp>
 
 #include <cassert>
 
@@ -89,7 +90,7 @@ assert(decompressed == expected);
 # Example for bzip2
 
 ```C++ 
-#include <ananke/gzip_compressor.hpp>
+#include <ananke/bzip2.hpp>
 
 #include <cassert>
 
@@ -98,6 +99,37 @@ std::vector<uint8_t> data(org_size, 0); // Just for fun;
 auto expected = data;
 
 ananke::bzip2 zipper(1, 0, 30); // Auto intialise to gzip level 6
+
+auto compressed = zipper.compress(data); 
+
+if (compressed.first)
+{
+    // Data was compressed
+    assert(compressed.second.size() != org_size);
+    assert(compressed.second == expected); 
+}
+else
+{
+    assert(compressed.second != expected);
+}
+
+auto decompressed = zipper.decompress(compressed.second); 
+
+assert(decompressed == expected); 
+```
+
+# Example for Snappy
+
+```C++ 
+#include <ananke/snappy.hpp>
+
+#include <cassert>
+
+const size_t org_size = 4096; 
+std::vector<uint8_t> data(org_size, 0); // Just for fun; 
+auto expected = data;
+
+ananke::snappy zipper;
 
 auto compressed = zipper.compress(data); 
 

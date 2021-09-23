@@ -14,6 +14,11 @@ namespace ananke
             auto zipper = zipper_factory<bzip2>(config);
             return zipper.compress(data); 
         }
+        else if (algo == algorithm::SNAPPY)
+        {
+            auto zipper = zipper_factory<snappy>(config);
+            return zipper.compress(data); 
+        }
         else
         {
             throw std::runtime_error("[Ananke] Unknown algorithmn provided");
@@ -31,6 +36,11 @@ namespace ananke
         else if (algo == algorithm::BZIP2)
         {
             auto zipper = zipper_factory<bzip2>(config);
+            return zipper.decompress(data, size); 
+        }
+        else if (algo == algorithm::SNAPPY)
+        {
+            auto zipper = zipper_factory<snappy>(config);
             return zipper.decompress(data, size); 
         }
         else

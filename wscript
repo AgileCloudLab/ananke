@@ -49,6 +49,7 @@ def build(bld):
 
     bld.recurse("test/test_gzip")
     bld.recurse("test/test_bzip2")
+    bld.recurse("test/test_snappy")
     bld.recurse("test/test_ananke")
 
     bld.recurse("benchmark/bzip2")

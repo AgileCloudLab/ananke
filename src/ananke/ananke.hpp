@@ -3,6 +3,7 @@
 
 #include "gzip.hpp"
 #include "bzip2.hpp"
+#include "snappy.hpp"
 
 #include <nlohmann/json.hpp>
 
@@ -16,7 +17,8 @@ namespace ananke
     enum algorithm
     {
         GZIP,
-        BZIP2
+        BZIP2,
+        SNAPPY
     };
 
     /// \fn
@@ -24,7 +26,7 @@ namespace ananke
     /// @param config is the json configuration used to configure the compression algorithm constructor for the parameters
     /// @return the configured compression algorithm zipper; 
     /// @throws std::runtime_error if an unknown template type is used 
-    template<typename T> T zipper_factory(const nlohmann::json& config)
+    template<typename T> T zipper_factory(const nlohmann::json& config = nlohmann::json())
     {
         if constexpr (std::is_same<T, gzip>::value)
         {
@@ -34,6 +36,11 @@ namespace ananke
         else if constexpr (std::is_same<T, bzip2>::value)
         {
             return bzip2(config);
+        }
+        else if constexpr (std::is_same<T, snappy>::value)
+        {
+            (void) config; // We don't need it
+            return snappy(); 
         }
         else
         {

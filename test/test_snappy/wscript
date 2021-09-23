@@ -1,0 +1,8 @@
+def build(bld):
+
+    
+    bld(features = 'cxx cxxprogram',
+        target = 'test_snappy',
+        source = 'test_snappy.cpp',
+        lib = ["fmt", "snappy"],
+        use = ['ananke_includes', 'ananke', 'gtest'])

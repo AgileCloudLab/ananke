@@ -87,9 +87,8 @@ TEST(test_ananke, test_ananke_snappy_compress_decompress_default)
     
     const size_t expected_size = 4096;
 
-    nlohmann::json config;
 
-    auto zipper = ananke::zipper_factory<ananke::snappy>(config); 
+    auto zipper = ananke::zipper_factory<ananke::snappy>(); 
 
     for (size_t i = 0; i < 10000; ++i)
     {
@@ -119,9 +118,7 @@ TEST(test_ananke, test_ananke_snappy_compress_decompress_default_zeros_and_a_one
     
     const size_t expected_size = 16384;
 
-    nlohmann::json config;
-
-    auto zipper = ananke::zipper_factory<ananke::snappy>(config);     
+    auto zipper = ananke::zipper_factory<ananke::snappy>();     
 
     for (size_t i = 0; i < 10000; ++i)
     {
@@ -287,8 +284,6 @@ TEST(test_ananke, test_ananke_snappy_ananke_compress_decompress_default_zeros)
     const size_t expected_size = 16384;
 
     nlohmann::json config;
-
-
 
     for (size_t i = 0; i < 10000; ++i)
     {
